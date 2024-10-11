@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* styles.css */
+.hide-scrollbar {
+    @apply overflow-y-auto;
+    /* Tailwind utility for vertical scrolling */
+    scrollbar-width: none;
+    /* For Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+    /* For Chrome, Safari, and Opera */
+}

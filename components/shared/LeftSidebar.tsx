@@ -6,8 +6,9 @@ import Link from "next/link"
 
 const LeftSidebar = () => {
     const navItems = [
-        { label: 'About', href: '/about', isActive: true },
         { label: 'News Feed', href: '/' },
+        { label: 'Gallery', href: '/gallery' },
+        { label: 'About', href: '/about', isActive: true },
         { label: 'Contact', href: '/contact' }
     ];
     return (
@@ -22,7 +23,7 @@ const LeftSidebar = () => {
                         <li key={index}>
                             <Link href={item.href}>
                                 <span
-                                    className={`block rounded-lg px-4 py-2 text-sm font-medium ${item.isActive
+                                    className={`block rounded-lg px-4 py-3 text-md font-medium ${item.isActive
                                             ? 'bg-gray-100 text-gray-700'
                                             : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700'
                                         }`}

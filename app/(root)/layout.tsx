@@ -1,4 +1,6 @@
 import LeftSidebar from "@/components/shared/LeftSidebar";
+import RightNavbar from "@/components/shared/RightSidebar";
+import TopNavbar from "@/components/shared/TopNavbar";
 
 
 export default function RootLayout({
@@ -7,9 +9,16 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <section className="flex bg-gray-50">
+        <section className="flex bg-gray-50 overflow-hidden h-screen">
             <LeftSidebar />
-            {children}
+            <div className="flex flex-col flex-1">
+                <TopNavbar />
+                <div className="flex flex-1">
+                    {children}
+                </div>
+            </div>
+            <RightNavbar />
         </section>
+
     );
 }
