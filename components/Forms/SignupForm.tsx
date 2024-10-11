@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import Link from "next/link"
-import { TUser } from "@/types"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
     username: z.string().min(2, { message: "Username must be at least 2 characters." }),
@@ -19,7 +19,8 @@ const formSchema = z.object({
     address: z.string().min(5, { message: "Address must be at least 5 characters." }),
 })
 
-const SignInForm = () => {
+const SignUpForm = () => {
+    const router = useRouter()
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -31,9 +32,42 @@ const SignInForm = () => {
         },
     })
 
-    const onSubmit = (data: Partial<TUser>) => {
-        console.log(data)
-    }
+    const onSubmit = async (data: any) => {
+        const formData = new FormData();
+        const fileInput = (document.getElementById("picture") as HTMLInputElement)?.files?.[0];
+
+        formData.append("username", data.username);
+        formData.append("email", data.email);
+        formData.append("password", data.password);
+        formData.append("phone", data.phone);
+        formData.append("address", data.address);
+        const role = "user";
+        formData.append("role", role);
+
+        if (fileInput) {
+            formData.append("profileImage", fileInput);
+        }
+
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/auth/register`, {
+                method: "POST",
+                body: formData,
+            });
+
+            const resultText = await response.text();
+
+            if (response.ok) {
+                const result = JSON.parse(resultText); 
+                console.log("User registered successfully:", result);
+                router.push('/sign-in')
+            } else {
+                console.error("Error:", resultText);
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+        }
+
+    };
 
     return (
         <main
@@ -95,7 +129,7 @@ const SignInForm = () => {
                             control={form.control}
                             name="password"
                             render={({ field }) => (
-                                <FormItem className="col-span-3">
+                                <FormItem className="col-span-2">
                                     <FormLabel>Password</FormLabel>
                                     <FormControl>
                                         <Input type="text" placeholder="********" {...field} />
@@ -119,6 +153,12 @@ const SignInForm = () => {
                                 </FormItem>
                             )}
                         />
+                        <FormItem>
+                            <FormLabel>Profile Picture</FormLabel>
+                            <FormControl>
+                                <Input id="picture" type="file" />
+                            </FormControl>
+                        </FormItem>
 
                         <FormField
                             control={form.control}
@@ -137,7 +177,7 @@ const SignInForm = () => {
                         <Button className="col-span-3 bg-teal-600 hover:bg-teal-500" type="submit">Submit</Button>
                         <p className="text-sm mt-8 text-center text-gray-800">
                             Already have an account? {" "}
-                            <Link href="/sign-up" className="text-gray-700 underline">Log in</Link>.
+                            <Link href="/sign-in" className="text-gray-700 underline">Log in</Link>.
                         </p>
                     </form>
                 </Form>
@@ -146,4 +186,4 @@ const SignInForm = () => {
     )
 }
 
-export default SignInForm
+export default SignUpForm
