@@ -1,4 +1,4 @@
-import Navbar from "@/components/shared/Navbar";
+import LeftSidebar from "@/components/shared/LeftSidebar";
 
 
 export default function RootLayout({
@@ -7,8 +7,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <section>
-            <Navbar />
+        <section className="flex bg-gray-50">
+            <LeftSidebar />
             {children}
         </section>
     );
