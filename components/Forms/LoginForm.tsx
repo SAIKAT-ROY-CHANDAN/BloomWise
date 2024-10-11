@@ -14,8 +14,8 @@ import { Button } from "../ui/button"
 import { useForm } from "react-hook-form"
 import Link from "next/link"
 import { TUser } from "@/types"
+import { useRouter } from "next/navigation"
 
-// Zod schema for form validation
 const formSchema = z.object({
     email: z.string().email("Invalid email address."),
     password: z.string().min(6, {
@@ -23,6 +23,7 @@ const formSchema = z.object({
     }),
 })
 const LoginForm = () => {
+    const router = useRouter()
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -31,9 +32,33 @@ const LoginForm = () => {
         },
     })
 
-    const onSubmit = (values: Partial<TUser>) => {
-        console.log(values)
-    }
+    const onSubmit = async (values: Partial<TUser>) => {
+        console.log("Submitting values:", values);
+
+        try {
+            console.log('hel');
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/auth/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(values),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                console.log("Login successful:", result);
+                localStorage.setItem('token', result.data.token);
+                router.push('/');
+            } else {
+                console.error("Login failed:", result.message);
+            }
+        } catch (error) {
+            console.error("Error logging in:", error);
+        }
+    };
+
 
     return (
         <Form {...form}>
