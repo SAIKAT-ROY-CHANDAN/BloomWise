@@ -10,11 +10,12 @@ const LeftSidebar = () => {
         { label: 'News Feed', href: '/' },
         { label: 'Gallery', href: '/gallery' },
         { label: 'About', href: '/about', isActive: true },
-        { label: 'Contact', href: '/contact' }
+        { label: 'Contact', href: '/contact' },
+        { label: 'Profile', href: '/profile' },
     ];
 
     const token = localStorage.getItem('token')
-    console.log(token);
+    // console.log(token);
 
     return (
         <div className="flex h-screen flex-col w-[15%] justify-between border-e bg-white">

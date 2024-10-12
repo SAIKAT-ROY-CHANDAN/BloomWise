@@ -1,4 +1,5 @@
 import { InputFocusAnimation } from "../input-focus-animation"
+import NewPost from "../NewPost"
 import PostFilter from "../PostFilter"
 import { Button } from "../ui/button"
 
@@ -17,6 +18,7 @@ const TopNavbar = () => {
                     <Button className="bg-teal-600 hover:bg-teal-500 h-10">Search</Button>
                 </div>
                 <PostFilter />
+                <NewPost />
             </div>
         </div>
     )
