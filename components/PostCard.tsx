@@ -1,7 +1,7 @@
 import Image from "next/image"
 import postImage from '@/assets/green-leaf-bokeh-with-beautiful-soft-sunlight.jpg'
-import { Message, Verified } from "@/svgs"
-import { ThumbsDown, ThumbsUp } from "lucide-react"
+import { Verified } from "@/svgs"
+import { MessageSquareMore, ThumbsDown, ThumbsUp } from "lucide-react"
 import { Badge } from "./ui/badge"
 
 const PostCard = () => {
@@ -19,9 +19,14 @@ const PostCard = () => {
                 </a>
 
                 <div>
-                    <h3 className="font-medium sm:text-lg">
-                        <a href="#" className="hover:underline"> Question about Livewire Rendering and Alpine JS </a>
-                    </h3>
+                    <div className="flex gap-x-4 font-medium items-center">
+                        <h3 className="font-medium sm:text-lg">
+                            <a href="#" className="hover:underline"> Question about Livewire Rendering and Alpine JS </a>
+                        </h3>
+                        <h1 className="text-teal-600 cursor-pointer">
+                            + Follow
+                        </h1>
+                    </div>
 
                     <p className="line-clamp-2 text-sm text-gray-700 mb-1">
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus, accusantium temporibus
@@ -30,19 +35,19 @@ const PostCard = () => {
 
 
                     <Badge variant='outline'>Programming</Badge>
-                    <div className="mt-2 sm:flex sm:items-center sm:gap-2">
-                        <div className="flex items-center gap-1 text-gray-500">
+                    <div className="mt-2 sm:flex sm:items-center sm:gap-3">
+                        <div className="flex items-center gap-1 text-gray-500 cursor-pointer">
                             <ThumbsUp size={14} />
 
                             <p className="text-xs">14</p>
                         </div>
-                        <div className="flex items-center gap-1 text-gray-500">
+                        <div className="flex items-center gap-1 text-gray-500 cursor-pointer">
                             <ThumbsDown size={14} />
 
                             <p className="text-xs">14</p>
                         </div>
-                        <div className="flex items-center gap-1 text-gray-500">
-                            <Message />
+                        <div className="flex items-center gap-2 text-gray-500">
+                            <MessageSquareMore size={14} />
 
                             <p className="text-xs">14 comments</p>
                         </div>
