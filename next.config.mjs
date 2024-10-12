@@ -3,7 +3,8 @@ const nextConfig = {
     images: {
         domains: [
             'images.unsplash.com',
-            'readymadeui.com'
+            'readymadeui.com',
+            'i.ibb.co.com'
         ]
     }
 };

@@ -15,6 +15,8 @@ import { useForm } from "react-hook-form"
 import Link from "next/link"
 import { TUser } from "@/types"
 import { useRouter } from "next/navigation"
+import { useAppDispatch } from "@/redux/hooks"
+import { setUser } from "@/redux/slices/authSlice"
 
 const formSchema = z.object({
     email: z.string().email("Invalid email address."),
@@ -22,8 +24,10 @@ const formSchema = z.object({
         message: "Password must be at least 6 characters.",
     }),
 })
+
 const LoginForm = () => {
     const router = useRouter()
+    const dispatch = useAppDispatch()
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -33,7 +37,6 @@ const LoginForm = () => {
     })
 
     const onSubmit = async (values: Partial<TUser>) => {
-        console.log("Submitting values:", values);
 
         try {
             console.log('hel');
@@ -48,8 +51,10 @@ const LoginForm = () => {
             const result = await response.json();
 
             if (response.ok) {
-                console.log("Login successful:", result);
-                localStorage.setItem('token', result.data.token);
+                // console.log("Login successful:", result);
+
+                const { user, token } = result.data;
+                dispatch(setUser({ user, token }));
                 router.push('/');
             } else {
                 console.error("Login failed:", result.message);

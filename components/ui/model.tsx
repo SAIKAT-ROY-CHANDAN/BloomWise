@@ -56,7 +56,7 @@ export function FramerModal({
         return () => {
             document.removeEventListener('keydown', handleKeyDown)
         }
-    }, [open])
+    }, [open, setOpen])
     
     return (
         <ModalContext.Provider value={{ open, setOpen }}>

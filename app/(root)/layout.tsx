@@ -17,6 +17,7 @@ export default function RootLayout({
                     <TopNavbar />
                     <div className="flex flex-1">
                         {children}
+                        <h1>laglaj</h1>
                     </div>
                 </div>
                 <RightNavbar />

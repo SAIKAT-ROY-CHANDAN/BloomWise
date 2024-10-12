@@ -4,6 +4,7 @@ import { BloomWiseTeal } from "@/svgs"
 import { Button } from "../ui/button"
 import Link from "next/link"
 import Image from "next/image"
+import { useAppSelector } from "@/redux/hooks"
 
 const LeftSidebar = () => {
     const navItems = [
@@ -13,9 +14,8 @@ const LeftSidebar = () => {
         { label: 'Contact', href: '/contact' },
         { label: 'Profile', href: '/profile' },
     ];
-
-    const token = localStorage.getItem('token')
-    // console.log(token);
+    const token = useAppSelector((state) => state.auth.token)
+    const user = useAppSelector((state) => state.auth.user)
 
     return (
         <div className="flex h-screen flex-col w-[15%] justify-between border-e bg-white">
@@ -50,15 +50,15 @@ const LeftSidebar = () => {
                                 width={1080}
                                 height={720}
                                 alt=""
-                                src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                                src={user?.profileImage as string}
                                 className="size-10 rounded-full object-cover"
                             />
 
                             <div>
                                 <p className="text-xs">
-                                    <strong className="block font-medium">Eric Frusciante</strong>
+                                    <strong className="block font-medium">{user?.username}</strong>
 
-                                    <span> eric@frusciante.com </span>
+                                    <span> {user?.email}</span>
                                 </p>
                             </div>
                         </Link>
@@ -66,13 +66,13 @@ const LeftSidebar = () => {
                         <Button
                             className="bg-teal-600 rounded-lg text-white hover:bg-white hover:text-teal-600 hover:border hover:border-teal-600"
                         >
-                            <Link href="/sign-up">Login</Link>
+                            <Link href="/sign-in">Login</Link>
                         </Button>
                         <Button
                             className="bg-white text-teal-600 border border-teal-600 hover:bg-teal-600 hover:text-white hover:border-white"
                         >
                             <Link
-                                href="/sign-in"
+                                href="/sign-up"
                             >
                                 Register
                             </Link>
