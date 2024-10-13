@@ -76,12 +76,15 @@ export function FramerModal({
                             onClick={(e) => e.stopPropagation()}
                             className=" w-full max-w-md rounded-xl bg-white/5 p-6 backdrop-blur-2xl border"
                         >
-                            <button
+                            <div
                                 className="absolute top-2 right-2"
-                                onClick={() => setOpen(false)}
+                                onClick={(e) => {
+                                    e.stopPropagation(); // Prevent closing modal on button click
+                                    setOpen(false); // Close the modal
+                                }}
                             >
                                 <X />
-                            </button>
+                            </div>
                             {children}
                         </motion.div>
                     </motion.div>

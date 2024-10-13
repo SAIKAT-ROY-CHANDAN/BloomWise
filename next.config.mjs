@@ -4,7 +4,8 @@ const nextConfig = {
         domains: [
             'images.unsplash.com',
             'readymadeui.com',
-            'i.ibb.co.com'
+            'i.ibb.co.com',
+            'i.ibb.co'
         ]
     }
 };

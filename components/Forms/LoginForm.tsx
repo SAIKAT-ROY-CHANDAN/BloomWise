@@ -17,6 +17,7 @@ import { TUser } from "@/types"
 import { useRouter } from "next/navigation"
 import { useAppDispatch } from "@/redux/hooks"
 import { setUser } from "@/redux/slices/authSlice"
+import { useLoginMutation } from "@/redux/api/authApi"
 
 const formSchema = z.object({
     email: z.string().email("Invalid email address."),
@@ -28,6 +29,7 @@ const formSchema = z.object({
 const LoginForm = () => {
     const router = useRouter()
     const dispatch = useAppDispatch()
+    const [login] = useLoginMutation();
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -37,32 +39,16 @@ const LoginForm = () => {
     })
 
     const onSubmit = async (values: Partial<TUser>) => {
-
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/auth/login`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(values),
-            });
+            const result = await login(values).unwrap();
 
-            const result = await response.json();
-
-            if (response.ok) {
-                // console.log("Login successful:", result);
-
-                const { user, token } = result.data;
-                dispatch(setUser({ user, token }));
-                router.push('/');
-            } else {
-                console.error("Login failed:", result.message);
-            }
+            const { user, token } = result.data;
+            dispatch(setUser({ user, token }));
+            router.push('/');
         } catch (error) {
-            console.error("Error logging in:", error);
+            console.error("Login failed:", error);
         }
-    };
-
+    }
 
     return (
         <Form {...form}>

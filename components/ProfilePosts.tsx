@@ -25,10 +25,9 @@ const ProfilePosts = () => {
         setCurrentPage(page);
     };
 
-    console.log(postData);
     return (
         <div className="max-w-5xl mx-auto mt-4">
-            <h1 className="text-xl font-medium">Posts</h1>
+            <h1 className="text-xl font-medium my-2">Posts</h1>
             <div className="space-y-2">
                 {postData?.data?.map((post: TPost) => (
                     <PostCard key={post._id} post={post} />

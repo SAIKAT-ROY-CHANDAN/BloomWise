@@ -1,7 +1,8 @@
 export type TUser = {
+    _id: string,
     username: string,
     email: string;
-    password: string;
+    password?: string;
     phone: string;
     role: 'user' | 'admin';
     address: string;
