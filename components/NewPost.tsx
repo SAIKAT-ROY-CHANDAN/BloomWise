@@ -8,6 +8,7 @@ import 'react-quill/dist/quill.snow.css';
 import { useForm } from 'react-hook-form';
 import { useCreateNewPostMutation } from '@/redux/api/postApi';
 import { ReduxProvider } from './ReduxProvider/ReduxProvider';
+import { useAppSelector } from '@/redux/hooks';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -23,6 +24,7 @@ const NewPost = () => {
     const { register, handleSubmit } = useForm<PostFormInputs>();
     const [content, setContent] = useState('');
     const [createNewPost] = useCreateNewPostMutation()
+    const token = useAppSelector((state) => state.auth.token)
 
     const onSubmit = (data: PostFormInputs) => {
         const formData = new FormData();
@@ -36,7 +38,6 @@ const NewPost = () => {
         formData.append('data', JSON.stringify(postData));
         formData.append('postImage', data.image[0]);
 
-        const token = localStorage.getItem('token');
 
         createNewPost({ newPost: formData, token })
             .unwrap()

@@ -39,7 +39,6 @@ const LoginForm = () => {
     const onSubmit = async (values: Partial<TUser>) => {
 
         try {
-            console.log('hel');
             const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/auth/login`, {
                 method: "POST",
                 headers: {

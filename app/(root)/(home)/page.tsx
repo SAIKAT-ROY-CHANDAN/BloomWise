@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import NewPost from "@/components/NewPost";
 import PostCard from "@/components/PostCard";
 import TopNavbar from "@/components/shared/TopNavbar";
 
@@ -16,7 +17,9 @@ export default async function Home({ searchParams }: { searchParams: any }) {
   }
 
   const res = await fetch(`http://localhost:5000/api/post?${query}`, {
-    cache: 'no-store'
+    next: {
+      revalidate: 2
+    }
   });
 
   const result = await res.json();
@@ -27,6 +30,8 @@ export default async function Home({ searchParams }: { searchParams: any }) {
       <div className="p-4">
         <div className="space-y-4">
           <TopNavbar />
+          {/* New Post Button */}
+          <NewPost />
           {Array.isArray(posts) && posts.length > 0 ? (
             posts.map((post) => (
               <PostCard key={post._id} post={post} />

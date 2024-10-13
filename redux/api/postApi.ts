@@ -22,11 +22,25 @@ const postApi = baseApi.injectEndpoints({
                     url: 'post/',
                 }
             }
-        })
+        }),
+        getUserOwnPosts: builder.query({
+            query: ({ token, page, limit }) => {
+                return {
+                    url: 'post/user',
+                    params: { page, limit },
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                };
+            },
+            providesTags: ['Posts'],
+        }),
+
     })
 })
 
 export const {
     useCreateNewPostMutation,
-    useGetNewPostsQuery
+    useGetNewPostsQuery,
+    useGetUserOwnPostsQuery
 } = postApi

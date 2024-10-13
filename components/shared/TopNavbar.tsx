@@ -1,7 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
 import { InputFocusAnimation } from "../input-focus-animation"
-import NewPost from "../NewPost"
 import {
     Select,
     SelectContent,
@@ -68,9 +68,6 @@ const TopNavbar = () => {
                         </SelectGroup>
                     </SelectContent>
                 </Select>
-
-                {/* New Post Button */}
-                <NewPost />
             </form>
         </div>
     )

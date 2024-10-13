@@ -8,7 +8,7 @@ import { useAppSelector } from "@/redux/hooks"
 
 const LeftSidebar = () => {
     const navItems = [
-        { label: 'News Feed', href: '/', isActive: true },
+        { label: 'News Feed', href: '/' },
         { label: 'Gallery', href: '/gallery' },
         { label: 'About', href: '/about' },
         { label: 'Contact', href: '/contact' },
@@ -29,10 +29,7 @@ const LeftSidebar = () => {
                         <li key={index}>
                             <Link href={item.href}>
                                 <span
-                                    className={`block rounded-lg px-4 py-3 text-md font-medium ${item.isActive
-                                        ? 'bg-gray-100 text-gray-700'
-                                        : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700'
-                                        }`}
+                                    className={`block rounded-lg px-4 py-3 text-md font-medium'bg-gray-100 text-gray-700 hover:bg-gray-100 hover:text-gray-700`}
                                 >
                                     {item.label}
                                 </span>
@@ -62,25 +59,25 @@ const LeftSidebar = () => {
                                 </p>
                             </div>
                         </Link>
-                    </div> : <div className="flex text-center flex-col gap-2 mb-4 mx-4">
-                        <Button
-                            className="bg-teal-600 rounded-lg text-white hover:bg-white hover:text-teal-600 hover:border hover:border-teal-600"
-                        >
-                            <Link href="/sign-in">Login</Link>
-                        </Button>
-                        <Button
-                            className="bg-white text-teal-600 border border-teal-600 hover:bg-teal-600 hover:text-white hover:border-white"
-                        >
-                            <Link
-                                href="/sign-up"
+                    </div> : <div className="mb-4 p-2 flex flex-col justify-center items-center gap-y-2">
+                        <Link href="/sign-in">
+                            <Button
+                                className="bg-teal-600 rounded-lg text-white hover:bg-white w-32 hover:text-teal-600 hover:border hover:border-teal-600"
+                            >
+                                Login
+                            </Button>
+                        </Link>
+                        <Link href="/sign-up">
+                            <Button
+                                className="bg-white text-teal-600 border border-teal-600 w-32 hover:bg-teal-600 hover:text-white hover:border-white"
                             >
                                 Register
-                            </Link>
-                        </Button>
+                            </Button>
+                        </Link>
                     </div>
                 }
             </div>
-        </div>
+        </div >
     )
 }
 
