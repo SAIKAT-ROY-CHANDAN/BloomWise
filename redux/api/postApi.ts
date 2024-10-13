@@ -4,7 +4,7 @@ const postApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         createNewPost: builder.mutation({
             query: ({ newPost, token }) => {
-                // console.log(newPost, token);
+                console.log(newPost, token);
                 return {
                     url: 'post/create',
                     method: 'POST',
