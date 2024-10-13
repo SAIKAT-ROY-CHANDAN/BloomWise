@@ -10,7 +10,8 @@ const postApi = baseApi.injectEndpoints({
                     method: 'POST',
                     body: newPost,
                     headers: {
-                        Authorization: `Bearer ${token}`
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type' : 'application/json'
                     }
                 }
             },

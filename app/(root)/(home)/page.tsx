@@ -17,7 +17,7 @@ export default async function Home({ searchParams }: { searchParams: any }) {
   }
 
   // const res = await fetch(`http://localhost:5000/api/post?${query}`, {
-  const res = await fetch(`https://bloom-wise-backend-6.vercel.app/api/post?${query}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_LIVE_API_URL}/api/post?${query}`, {
     next: {
       revalidate: 2
     }
