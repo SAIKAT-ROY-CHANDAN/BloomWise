@@ -6,6 +6,8 @@ interface InputFocusAnimationProps {
     type: string;
     name: string;
     autoComplete: string;
+    value?: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const InputFocusAnimation = ({ label, ...props }: InputFocusAnimationProps) => {

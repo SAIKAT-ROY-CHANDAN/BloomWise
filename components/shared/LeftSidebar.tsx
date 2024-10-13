@@ -8,9 +8,9 @@ import { useAppSelector } from "@/redux/hooks"
 
 const LeftSidebar = () => {
     const navItems = [
-        { label: 'News Feed', href: '/' },
+        { label: 'News Feed', href: '/', isActive: true },
         { label: 'Gallery', href: '/gallery' },
-        { label: 'About', href: '/about', isActive: true },
+        { label: 'About', href: '/about' },
         { label: 'Contact', href: '/contact' },
         { label: 'Profile', href: '/profile' },
     ];

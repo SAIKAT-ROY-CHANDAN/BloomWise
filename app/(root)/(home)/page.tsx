@@ -1,19 +1,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import PostCard from "@/components/PostCard";
+import TopNavbar from "@/components/shared/TopNavbar";
 
-export default async function Home() {
-  const res = await fetch('http://localhost:5000/api/post', {
-    next: { revalidate: 60 }
+export default async function Home({ searchParams }: { searchParams: any }) {
+  const searchTerm = searchParams.searchTerm || '';
+  const category = searchParams.category || '';
+  const sort = searchParams.sort || '';
+
+  let query = `searchTerm=${searchTerm}`;
+  if (category) {
+    query += `&category=${category}`;
+  }
+  if (sort) {
+    query += `&sort=${sort}`;
+  }
+
+  const res = await fetch(`http://localhost:5000/api/post?${query}`, {
+    cache: 'no-store'
   });
-  const result = await res.json();
 
+  const result = await res.json();
   const posts = result.data || [];
-  console.log("Fetched Data:", res);
-  
+
   return (
     <main className="h-screen w-full overflow-y-auto bg-gray-50 hide-scrollbar">
       <div className="p-4">
         <div className="space-y-4">
+          <TopNavbar />
           {Array.isArray(posts) && posts.length > 0 ? (
             posts.map((post) => (
               <PostCard key={post._id} post={post} />
