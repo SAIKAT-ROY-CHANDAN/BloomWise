@@ -49,7 +49,8 @@ const SignUpForm = () => {
         }
 
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/auth/register`, {
+            // const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/auth/register`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_LIVE_API_URL}/auth/register`, {
                 method: "POST",
                 body: formData,
             });
