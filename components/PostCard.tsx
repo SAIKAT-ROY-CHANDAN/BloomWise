@@ -5,22 +5,28 @@ import { Badge } from "./ui/badge"
 import { TPost } from "@/types"
 
 interface PostCardProps {
-    post: TPost; 
+    post: TPost;
 }
 
-const PostCard = ({post}: PostCardProps) => {
+const PostCard = ({ post }: PostCardProps) => {
 
     return (
         <article className="rounded-xl border-2 border-gray-100 bg-white">
             <div className="flex items-start gap-4 p-4 sm:p-6 lg:p-8">
-                <a href="#" className="block shrink-0">
-                    <Image
-                        width={1080}
-                        height={720}
-                        alt=""
-                        src={post?.image}
-                        className="size-14 rounded-lg object-cover"
-                    />
+                <a className="block shrink-0">
+                    {post?.image ? (
+                        <Image
+                            width={1080}
+                            height={720}
+                            alt="profileImage"
+                            src={post.image}
+                            className="size-14 rounded-lg object-cover"
+                        />
+                    ) : (
+                        <div className="size-14 text-xs rounded-lg bg-gray-200 flex items-center justify-center">
+                            No Image
+                        </div>
+                    )}
                 </a>
 
                 <div>
@@ -57,7 +63,7 @@ const PostCard = ({post}: PostCardProps) => {
 
                         <p className="hidden sm:block sm:text-xs sm:text-gray-500">
                             Posted by
-                            <a href="#" className="font-medium underline hover:text-gray-700"> John </a>
+                            <a className="font-medium underline hover:text-gray-700"> John </a>
                         </p>
                     </div>
                 </div>

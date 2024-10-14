@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { compressImage } from "@/utils/imagecompression"
 
 const formSchema = z.object({
     username: z.string().min(2, { message: "Username must be at least 2 characters." }),
@@ -44,10 +45,16 @@ const SignUpForm = () => {
         const role = "user";
         formData.append("role", role);
 
-        if (fileInput) {
-            formData.append("profileImage", fileInput);
-        }
 
+        if (fileInput) {
+            try {
+                const compressedImage = await compressImage(fileInput);
+                formData.append("profileImage", compressedImage);
+            } catch (error) {
+                console.error("Image compression failed:", error);
+                return; 
+            }
+        }
         try {
             // const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/auth/register`, {
             const response = await fetch(`${process.env.NEXT_PUBLIC_LIVE_API_URL}/auth/register`, {
@@ -58,7 +65,7 @@ const SignUpForm = () => {
             const resultText = await response.text();
 
             if (response.ok) {
-                const result = JSON.parse(resultText); 
+                const result = JSON.parse(resultText);
                 console.log("User registered successfully:", result);
                 router.push('/sign-in')
             } else {

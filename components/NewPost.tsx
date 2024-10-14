@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import { useCreateNewPostMutation } from '@/redux/api/postApi';
 import { ReduxProvider } from './ReduxProvider/ReduxProvider';
 import { useAppSelector } from '@/redux/hooks';
+import { compressImage } from '@/utils/imagecompression';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -26,7 +27,7 @@ const NewPost = () => {
     const [createNewPost] = useCreateNewPostMutation()
     const token = useAppSelector((state) => state.auth.token)
 
-    const onSubmit = (data: PostFormInputs) => {
+    const onSubmit = async(data: PostFormInputs) => {
         const formData = new FormData();
 
         const postData = {
@@ -36,9 +37,17 @@ const NewPost = () => {
         };
 
         formData.append('data', JSON.stringify(postData));
-        formData.append('postImage', data.image[0]);
+        // formData.append('postImage', data.image[0]);
 
-
+        if (data.image && data.image[0]) {
+            try {
+                const compressedImage = await compressImage(data.image[0]);
+                formData.append('postImage', compressedImage);
+            } catch (error) {
+                console.error('Image compression failed:', error);
+                return;
+            }
+        }
         createNewPost({ newPost: formData, token })
             .unwrap()
             .then((response) => {
@@ -105,15 +114,6 @@ const NewPost = () => {
                                 Submit Post
                             </Button>
                         </form>
-                        {/* <div className="mt-4">
-                        <button
-                            onClick={() => setModalOpen(false)}
-                            className="w-full p-3 bg-black dark:bg-white text-white dark:text-black rounded-md"
-                            type="button"
-                        >
-                            Got it, thanks!
-                        </button>
-                    </div> */}
                     </ModalContent>
                 </FramerModal>
             </div>

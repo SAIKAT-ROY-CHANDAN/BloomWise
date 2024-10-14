@@ -15,7 +15,7 @@ const postApi = baseApi.injectEndpoints({
                 }
             },
             invalidatesTags: ['Posts']
-        }),
+        }), 
         getNewPosts: builder.query({
             query: () => {
                 return {
