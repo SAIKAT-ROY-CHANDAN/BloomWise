@@ -3,6 +3,7 @@ import { Verified } from "@/svgs"
 import { MessageSquareMore, ThumbsDown, ThumbsUp } from "lucide-react"
 import { Badge } from "./ui/badge"
 import { TPost } from "@/types"
+import { removePTags } from "@/utils"
 
 interface PostCardProps {
     post: TPost;
@@ -39,10 +40,10 @@ const PostCard = ({ post }: PostCardProps) => {
                         </h1>
                     </div>
 
-                    <p className="line-clamp-2 text-sm text-gray-700 mb-1">{post.content}</p>
+                    <p className="line-clamp-1 sm:line-clamp-2 text-sm text-gray-700 mb-1"> {removePTags(post.content)}</p>
 
                     <Badge variant='outline'>{post.category}</Badge>
-                    <div className="mt-2 sm:flex sm:items-center sm:gap-3">
+                    <div className="mt-2 flex items-center gap-3">
                         <div className="flex items-center gap-1 text-gray-500 cursor-pointer">
                             <ThumbsUp size={14} />
 
@@ -69,9 +70,9 @@ const PostCard = ({ post }: PostCardProps) => {
                 </div>
             </div>
 
-            <div className="flex justify-end">
+            <div className="flex sm:justify-end">
                 <strong
-                    className="-mb-[2px] -me-[2px] inline-flex items-center gap-1 rounded-ee-xl rounded-ss-xl bg-green-600 px-3 py-1.5 text-white"
+                    className="-mb-[2px] -me-[2px] inline-flex items-center gap-1 rounded-es-xl sm:rounded-es-none sm:rounded-se-none rounded-se-xl sm:rounded-ee-xl sm:rounded-ss-xl bg-green-600 px-3 py-1.5 text-white"
                 >
                     <Verified />
                     <span className="text-[10px] font-medium sm:text-xs">Premium</span>

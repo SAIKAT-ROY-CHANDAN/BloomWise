@@ -13,7 +13,7 @@ interface InputFocusAnimationProps {
 export const InputFocusAnimation = ({ label, ...props }: InputFocusAnimationProps) => {
     const id = useId();
     return (
-        <div className="group relative z-0 transition-all w-full focus-within:z-10">
+        <div className="group relative z-0 transition-all focus-within:z-10">
             <input
                 id={id}
                 {...props}

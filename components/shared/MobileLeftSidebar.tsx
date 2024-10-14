@@ -5,23 +5,24 @@ import { Button } from "../ui/button"
 import Link from "next/link"
 import Image from "next/image"
 import { useAppSelector } from "@/redux/hooks"
+import { House, Images, SquareUserRound, Store, UserRound } from "lucide-react"
 
-const LeftSidebar = () => {
+const MobileLeftSidebar = () => {
     const navItems = [
-        { label: 'News Feed', href: '/' },
-        { label: 'Gallery', href: '/gallery' },
-        { label: 'About', href: '/about' },
-        { label: 'Contact', href: '/contact' },
-        { label: 'Profile', href: '/profile' },
+        { label: 'News Feed', href: '/', icon: <House strokeWidth={1.25} /> },
+        { label: 'Gallery', href: '/gallery', icon: <Images strokeWidth={1.75} /> },
+        { label: 'About', href: '/about', icon: <Store strokeWidth={1.25} /> },
+        { label: 'Contact', href: '/contact', icon: <SquareUserRound strokeWidth={1.25} /> },
+        { label: 'Profile', href: '/profile', icon: <UserRound strokeWidth={1.25} /> },
     ];
     const token = useAppSelector((state) => state.auth.token)
     const user = useAppSelector((state) => state.auth.user)
 
     return (
-        <div className="hidden lg:block w-[15%]">
+        <div className="lg:hidden">
             <div className="flex h-screen flex-col justify-between border-e bg-white">
-                <div className="px-4 py-6">
-                    <span className="grid h-10 w-16 text-teal-600 place-content-center rounded-lg">
+                <div className="px-1 sm:px-4 py-6">
+                    <span className="grid  text-teal-600 place-content-center rounded-lg">
                         <BloomWiseTeal />
                     </span>
 
@@ -30,9 +31,9 @@ const LeftSidebar = () => {
                             <li key={index}>
                                 <Link href={item.href}>
                                     <span
-                                        className={`block rounded-lg px-4 py-3 text-md font-medium'bg-gray-100 text-gray-700 hover:bg-gray-100 hover:text-gray-700`}
+                                        className={`block rounded-lg px-1 md:px-4 py-3 text-md font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700`}
                                     >
-                                        {item.label}
+                                        {item.icon} {/* Render only the icon */}
                                     </span>
                                 </Link>
                             </li>
@@ -52,13 +53,13 @@ const LeftSidebar = () => {
                                     className="size-10 rounded-full object-cover"
                                 />
 
-                                <div>
-                                    <p className="text-xs">
-                                        <strong className="block font-medium">{user?.username}</strong>
+                                {/* <div>
+                                <p className="text-xs">
+                                    <strong className="block font-medium">{user?.username}</strong>
 
-                                        <span> {user?.email}</span>
-                                    </p>
-                                </div>
+                                    <span> {user?.email}</span>
+                                </p>
+                            </div> */}
                             </Link>
                         </div> : <div className="mb-4 p-2 flex flex-col justify-center items-center gap-y-2">
                             <Link href="/sign-in">
@@ -83,4 +84,4 @@ const LeftSidebar = () => {
     )
 }
 
-export default LeftSidebar
+export default MobileLeftSidebar

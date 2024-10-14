@@ -40,9 +40,9 @@ const TopNavbar = () => {
 
 
     return (
-        <div className="w-full border-b p-8 bg-white">
-            <form className="flex gap-4 w-[60%] items-center justify-center mx-auto" onSubmit={handleSearch}>
-                <div className="w-full flex gap-x-3 items-center">
+        <div className="w-full border-b p-2 sm:p-4 md:p-8 bg-white">
+            <form className="flex flex-col sm:flex-row sm:justify-around md:gap-x-4 md:justify-center gap-y-3 items-center" onSubmit={handleSearch}>
+                <div className="flex gap-x-3">
                     {/* Search Input */}
                     <InputFocusAnimation
                         label="Search"
