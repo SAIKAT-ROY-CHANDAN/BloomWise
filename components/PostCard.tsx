@@ -1,15 +1,32 @@
+'use client'
 import Image from "next/image"
 import { Verified } from "@/svgs"
 import { MessageSquareMore, ThumbsDown, ThumbsUp } from "lucide-react"
 import { Badge } from "./ui/badge"
 import { TPost } from "@/types"
 import { removePTags } from "@/utils"
+import { useAppSelector } from "@/redux/hooks"
+import { useUpvotePostMutation } from "@/redux/api/postApi"
+import Link from "next/link"
+
 
 interface PostCardProps {
     post: TPost;
 }
 
 const PostCard = ({ post }: PostCardProps) => {
+    const token = useAppSelector((state) => state.auth.token)
+    const [upvotePost] = useUpvotePostMutation()
+
+    const onupvotePost = async () => {
+        try {
+            const res = await upvotePost({ token, id: post._id }).unwrap(); 
+            console.log('Success response:', res);
+        } catch (error) {
+            console.log('Error:', error);
+        }
+    }
+
 
     return (
         <article className="rounded-xl border-2 border-gray-100 bg-white">
@@ -44,7 +61,7 @@ const PostCard = ({ post }: PostCardProps) => {
 
                     <Badge variant='outline'>{post.category}</Badge>
                     <div className="mt-2 flex items-center gap-3">
-                        <div className="flex items-center gap-1 text-gray-500 cursor-pointer">
+                        <div onClick={onupvotePost} className="flex items-center gap-1 text-gray-500 cursor-pointer">
                             <ThumbsUp size={14} />
 
                             <p className="text-xs">{post.upvotes}</p>
@@ -54,11 +71,11 @@ const PostCard = ({ post }: PostCardProps) => {
 
                             <p className="text-xs">{post.downvotes}</p>
                         </div>
-                        <div className="flex items-center gap-2 text-gray-500">
+                        <Link href={`/${post._id}`} className="flex items-center gap-2 text-gray-500">
                             <MessageSquareMore size={14} />
 
                             <p className="text-xs">{post.comments.length} comments</p>
-                        </div>
+                        </Link>
 
                         <span className="hidden sm:block" aria-hidden="true">&middot;</span>
 

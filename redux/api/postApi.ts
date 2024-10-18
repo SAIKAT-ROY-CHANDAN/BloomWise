@@ -15,13 +15,14 @@ const postApi = baseApi.injectEndpoints({
                 }
             },
             invalidatesTags: ['Posts']
-        }), 
+        }),
         getNewPosts: builder.query({
             query: () => {
                 return {
                     url: 'post/',
                 }
-            }
+            },
+            providesTags: ['Posts', 'Votes']
         }),
         getUserOwnPosts: builder.query({
             query: ({ token, page, limit }) => {
@@ -35,6 +36,17 @@ const postApi = baseApi.injectEndpoints({
             },
             providesTags: ['Posts'],
         }),
+        upvotePost: builder.mutation({
+            query: ({ token, id }) => ({
+                url: `post/upvote/${id}`,
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }),
+            invalidatesTags: ['Votes'],
+        })
+
 
     })
 })
@@ -42,5 +54,6 @@ const postApi = baseApi.injectEndpoints({
 export const {
     useCreateNewPostMutation,
     useGetNewPostsQuery,
-    useGetUserOwnPostsQuery
+    useGetUserOwnPostsQuery,
+    useUpvotePostMutation
 } = postApi
