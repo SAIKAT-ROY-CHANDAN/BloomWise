@@ -1,3 +1,4 @@
+import Comments from "@/components/Comments";
 import PostDescription from "@/components/PostDescription";
 
 interface SinglePostPageProps {
@@ -11,8 +12,9 @@ const SinglePostPage = ({ params }: SinglePostPageProps) => {
     const { postId } = params
     console.log(postId);
     return (
-        <div className="w-full">
+        <div className="w-full overflow-auto hide-scrollbar">
             <PostDescription />
+            <Comments />
         </div>
     )
 }

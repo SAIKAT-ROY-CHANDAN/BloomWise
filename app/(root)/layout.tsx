@@ -15,7 +15,7 @@ export default function RootLayout({
                 <LeftSidebar />
                 <MobileLeftSidebar />
                 <div className="flex flex-col flex-1">
-                    <div className="flex flex-1">
+                    <div className="flex flex-1 overflow-y-auto">
                         {children}
                     </div>
                 </div>

@@ -12,8 +12,8 @@ const actions = [
 
 const PostDescription = () => {
     return (
-        <div className="bg-white max-w-5xl mx-auto mt-5 flex items-center justify-center">
-            <div className="space-y-4 px-8 py-8 rounded-2xl">
+        <div className="bg-white max-w-4xl mx-auto mt-5 flex items-center justify-center">
+            <div className="space-y-4 px-6 py-8 rounded-2xl">
                 <h1 className="text-xl font-bold">I am a garden</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, maiores!</p>
                 <Badge variant='outline'>Category</Badge>
@@ -35,8 +35,6 @@ const PostDescription = () => {
                             </div>
                         ))}
                     </div>
-
-                    {/* <span className="hidden sm:block" aria-hidden="true">&middot;</span> */}
 
                     <div className="flex gap-x-2">
                         <p className="hidden sm:block sm:text-xs sm:text-gray-500">
