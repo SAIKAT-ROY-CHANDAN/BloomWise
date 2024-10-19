@@ -22,7 +22,7 @@ const postApi = baseApi.injectEndpoints({
                     url: 'post/',
                 }
             },
-            providesTags: ['Posts', 'Votes']
+            providesTags: ['Posts', 'Votes', 'Comments']
         }),
         getUserOwnPosts: builder.query({
             query: ({ token, page, limit }) => {
@@ -57,6 +57,19 @@ const postApi = baseApi.injectEndpoints({
                     },
                 }
             },
+            invalidatesTags: ['Comments']
+        }),
+        getComments: builder.query({
+            query: ({ postId, token }) => {
+                console.log(postId);
+                return {
+                    url: `post/${postId}/comments`,
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                };
+            },
+            providesTags: ['Comments']
         }),
     })
 })
@@ -66,5 +79,6 @@ export const {
     useGetNewPostsQuery,
     useGetUserOwnPostsQuery,
     useUpvotePostMutation,
-    useAddCommentMutation
+    useAddCommentMutation,
+    useGetCommentsQuery
 } = postApi
