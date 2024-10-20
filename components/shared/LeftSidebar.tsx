@@ -30,7 +30,7 @@ const LeftSidebar = () => {
                             <li key={index}>
                                 <Link href={item.href}>
                                     <span
-                                        className={`block rounded-lg px-4 py-3 text-md font-medium'bg-gray-100 text-gray-700 hover:bg-gray-100 hover:text-gray-700`}
+                                        className={`block rounded-lg px-4 py-3 text-md font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700`}
                                     >
                                         {item.label}
                                     </span>

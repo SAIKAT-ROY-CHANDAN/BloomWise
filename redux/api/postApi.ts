@@ -71,6 +71,19 @@ const postApi = baseApi.injectEndpoints({
             },
             providesTags: ['Comments']
         }),
+        editComment: builder.mutation({
+            query: ({ token, postId, commentId, updatedText }) => {
+                return {
+                    url: `post/${postId}/comments/${commentId}`,
+                    method: 'PUT',
+                    body: { updatedText },
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            },
+            invalidatesTags: ['Comments']
+        }),
     })
 })
 
@@ -80,5 +93,6 @@ export const {
     useGetUserOwnPostsQuery,
     useUpvotePostMutation,
     useAddCommentMutation,
-    useGetCommentsQuery
+    useGetCommentsQuery,
+    useEditCommentMutation
 } = postApi

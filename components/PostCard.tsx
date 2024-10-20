@@ -50,9 +50,9 @@ const PostCard = ({ post }: PostCardProps) => {
                 <div>
                     <div className="flex gap-x-4 font-medium items-center">
                         <h3 className="font-medium sm:text-lg">
-                            <a className="hover:underline">{post.title}</a>
+                            <a className="hover:underline line-clamp-1 sm:line-clamp-none cursor-pointer">{post.title}</a>
                         </h3>
-                        <h1 className="text-teal-600 cursor-pointer">
+                        <h1 className="text-teal-600 cursor-pointer flex-1 sm:flex-auto">
                             + Follow
                         </h1>
                     </div>

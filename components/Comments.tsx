@@ -4,11 +4,13 @@ import { useAddCommentMutation, useGetCommentsQuery } from "@/redux/api/postApi"
 import { InputFocusAnimation as CommentInput } from "./input-focus-animation"
 import { FormEvent, useState } from "react";
 import { useAppSelector } from "@/redux/hooks";
-import { Button } from "./ui/button";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import { Send } from "lucide-react";
 import { getTimeAgo } from "@/utils";
+import CommentEditDelete from "./CommentEditDelete";
+
+
 
 const Comments = () => {
     const { postId } = useParams()
@@ -57,9 +59,9 @@ const Comments = () => {
                             onChange={(e) => setCommentText(e.target.value)}
                         />
                     </div>
-                    <Button variant='outline' className="bg-transparent" type="submit">
-                        <Send strokeWidth={1.25} className="" />
-                    </Button>
+                    <button className="p-2 rounded-full border border-gray-400 hover:bg-gray-200" type="submit">
+                        <Send strokeWidth={1.25} className="hover:text-gray-50" />
+                    </button>
                 </form>
             </div>
 
@@ -68,17 +70,22 @@ const Comments = () => {
                 {commentsData?.data?.map((comment: any) => (
                     <div
                         key={comment._id}
-                        className="bg-white space-y-2 w-11/12 sm:w-10/12 p-3 md:p-4 max-w-4xl mx-auto mt-4 rounded-xl shadow-sm border"
+                        className="flex  justify-between items-start bg-white space-y-2 w-11/12 sm:w-10/12 p-3 md:p-4 max-w-4xl mx-auto mt-4 rounded-xl shadow-sm border"
                     >
-                        <h1 className="md:text-md text-sm text-gray-800 font-semibold">
-                            {comment.createdBy?.username}
-                        </h1>
-                        <p className="text-gray-700 md:text-sm text-xs mb-2">
-                            {comment.commentText}
-                        </p>
-                        <h2 className="text-xs font-medium text-gray-400 md:text-gray-600">
-                            Created At: {getTimeAgo(comment.createdAt)}
-                        </h2>
+                        <div>
+                            <h1 className="md:text-md text-sm text-gray-800 font-semibold">
+                                {comment.createdBy?.username}
+                            </h1>
+                            <p className="text-gray-700 md:text-sm text-xs mb-2">
+                                {comment.commentText}
+                            </p>
+                            <h2 className="text-xs font-medium text-gray-400 md:text-gray-600">
+                                Created At: {getTimeAgo(comment.createdAt)}
+                            </h2>
+                        </div>
+
+                        {/* 'For Delete and Edit Comment' */}
+                        <CommentEditDelete postId={postId} commentId={comment._id} token={token} />
                     </div>
                 ))}
             </div>

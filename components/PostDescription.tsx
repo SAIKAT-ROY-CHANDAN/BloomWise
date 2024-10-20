@@ -12,7 +12,7 @@ const actions = [
 
 const PostDescription = () => {
     return (
-        <div className="bg-white w-[90%] sm:w-10/12 2xl:max-w-4xl mx-auto mt-5 flex items-center justify-center">
+        <div className="bg-white w-[90%] drop-shadow-sm shadow-gray-500 sm:w-10/12 2xl:max-w-4xl mx-auto mt-5 flex items-center justify-center">
             <div className="space-y-3 p-3 md:space-y-4 md:px-6 md:py-8 rounded-2xl">
                 <h1 className="text-md md:text-xl font-semibold text-gray-750 text-md">I am a garden</h1>
                 <p className="text-gray-700 text-sm md:text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, maiores!</p>

@@ -21,7 +21,7 @@ const MobileLeftSidebar = () => {
     return (
         <div className="lg:hidden">
             <div className="flex h-screen flex-col justify-between border-e bg-white">
-                <div className="px-1 sm:px-4 py-6">
+                <div className="px-4 py-6">
                     <span className="grid  text-teal-600 place-content-center rounded-lg">
                         <BloomWiseTeal />
                     </span>
