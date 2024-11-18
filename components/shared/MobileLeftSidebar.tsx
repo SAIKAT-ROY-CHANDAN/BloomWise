@@ -5,7 +5,7 @@ import { Button } from "../ui/button"
 import Link from "next/link"
 import Image from "next/image"
 import { useAppSelector } from "@/redux/hooks"
-import { House, Images, SquareUserRound, Store, UserRound } from "lucide-react"
+import { House, Images, LayoutDashboard, SquareUserRound, Store, UserRound } from "lucide-react"
 
 const MobileLeftSidebar = () => {
     const navItems = [
@@ -14,6 +14,7 @@ const MobileLeftSidebar = () => {
         { label: 'About', href: '/about', icon: <Store strokeWidth={1.25} /> },
         { label: 'Contact', href: '/contact', icon: <SquareUserRound strokeWidth={1.25} /> },
         { label: 'Profile', href: '/profile', icon: <UserRound strokeWidth={1.25} /> },
+        { label: 'Dashboard', href: '/dashboard', icon: <LayoutDashboard /> },
     ];
     const token = useAppSelector((state) => state.auth.token)
     const user = useAppSelector((state) => state.auth.user)

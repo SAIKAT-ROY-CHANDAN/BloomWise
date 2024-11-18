@@ -13,6 +13,7 @@ const LeftSidebar = () => {
         { label: 'About', href: '/about' },
         { label: 'Contact', href: '/contact' },
         { label: 'Profile', href: '/profile' },
+        { label: 'Dashboard', href: '/dashboard' },
     ];
     const token = useAppSelector((state) => state.auth.token)
     const user = useAppSelector((state) => state.auth.user)
@@ -63,14 +64,14 @@ const LeftSidebar = () => {
                         </div> : <div className="mb-4 p-2 flex flex-col justify-center items-center gap-y-2">
                             <Link href="/sign-in">
                                 <Button
-                                    className="bg-teal-600 rounded-lg text-white hover:bg-white w-32 hover:text-teal-600 hover:border hover:border-teal-600"
+                                    className="bg-teal-600 rounded-lg text-white hover:bg-white w-48 hover:text-teal-600 hover:border hover:border-teal-600"
                                 >
                                     Login
                                 </Button>
                             </Link>
                             <Link href="/sign-up">
                                 <Button
-                                    className="bg-white text-teal-600 border border-teal-600 w-32 hover:bg-teal-600 hover:text-white hover:border-white"
+                                    className="bg-white text-teal-600 border border-teal-600 w-48 hover:bg-teal-600 hover:text-white hover:border-white"
                                 >
                                     Register
                                 </Button>
